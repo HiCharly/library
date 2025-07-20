@@ -5,4 +5,5 @@ return [
     'edit' => 'Modifier',
     'delete' => 'Supprimer',
     'view' => 'Afficher',
+    'save' => 'Enregistrer',
 ];
