@@ -8,14 +8,23 @@
             @foreach ($this->books as $book)
                 <div
                     class="rounded-lg overflow-hidden relative border border-neutral-200/60 bg-white text-neutral-700 shadow-sm w-full md:w-[380px]">
-                    <div class="h-60 flex items-center justify-center bg-neutral-100">
-                        <flux:icon.book-open-text class="size-25" />
-                    </div>
+                    @if($book->thumbnail_url)
+                        <div class="h-60 w-full bg-cover object-center" style="background-image: url('{{ $book->thumbnail_url }}');"></div>
+                    @else
+                        <div class="h-60 flex items-center justify-center bg-neutral-100">
+                            <flux:icon.book-open-text class="size-25" />
+                        </div>
+                    @endif
+
                     <div class="p-7">
                         <flux:heading>{{ $book->title }}</flux:heading>
                         <flux:text class="line-clamp-3" title="{{ $book->description }}">
                             {{ $book->description }}
                         </flux:text>
+                        <flux:spacer/>
+                        <flux:button class="w-full mt-5" :href="route('books.show', $book->id)">
+                            {{ __('actions.view') }}
+                        </flux:button>
                     </div>
                 </div>
             @endforeach
@@ -29,7 +38,7 @@
                         </flux:button>
                     </flux:modal.trigger>
                 </div>
-                <flux:modal name="create-book" class="md:w-96">
+                <flux:modal name="create-book" class="w-full">
                     <form wire:submit="store" class="space-y-6">
                         <flux:heading size="lg">{{ __('app.book.create_title') }}</flux:heading>
                         <flux:input :label="__('app.book.title')" :placeholder="__('app.book.title')" wire:model="form.title" required />

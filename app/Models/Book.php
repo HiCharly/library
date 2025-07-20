@@ -9,4 +9,8 @@ class Book extends Model
 {
     /** @use HasFactory<\Database\Factories\BookFactory> */
     use HasFactory;
+
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
 }

@@ -37,7 +37,7 @@
                         </flux:button>
                     </flux:modal.trigger>
                 </div>
-                <flux:modal name="create-library" class="md:w-96">
+                <flux:modal name="create-library" class="w-full">
                     <form wire:submit="store" class="space-y-6">
                         <flux:heading size="lg">{{ __('app.library.create_title') }}</flux:heading>
                         <flux:input :label="__('app.library.name')" :placeholder="__('app.library.name')"
