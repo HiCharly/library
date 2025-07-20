@@ -14,7 +14,8 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('app.dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="wallet" :href="route('libraries.index')" :current="request()->routeIs('libraries.index')" wire:navigate>{{ trans_choice('app.library.library', 2) }}</flux:navlist.item>
+                    <flux:navlist.item icon="wallet" :href="route('libraries.index')" :current="request()->routeIs('libraries.*')" wire:navigate>{{ trans_choice('app.library.library', 2) }}</flux:navlist.item>
+                    <flux:navlist.item icon="book-open-text" :href="route('books.index')" :current="request()->routeIs('books.*')" wire:navigate>{{ trans_choice('app.book.book', 2) }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

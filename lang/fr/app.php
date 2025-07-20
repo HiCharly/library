@@ -13,4 +13,20 @@ return [
 
         'name' => 'Nom',
     ],
+
+    'book' => [
+        'book' => 'Livre|Livres',
+
+        'index_description' => 'Bienvenue dans votre espace de gestion des livres. Vous pouvez ajouter ou corriger les informations de vos livres ici.',
+        'create_button' => 'Ajouter un livre manuellement',
+        'create_title' => 'Nouveau livre',
+
+        'title' => 'Titre',
+        'author' => 'Auteur',
+        'isbn' => 'ISBN',
+        'description' => 'Description',
+        'publisher' => 'Éditeur',
+        'page_count' => 'Nombre de pages',
+        'published_at' => 'Date de publication',
+    ],
 ];

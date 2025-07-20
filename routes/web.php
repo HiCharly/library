@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\App\BookIndex;
 use App\Livewire\App\LibraryIndex;
 use App\Livewire\App\LibraryShow;
 use App\Livewire\Settings\Appearance;
@@ -18,6 +19,8 @@ Route::view('dashboard', 'dashboard')
 Route::middleware(['auth'])->group(function () {
     Route::get('/libraries', LibraryIndex::class)->name('libraries.index');
     Route::get('/libraries/{library}', LibraryShow::class)->name('libraries.show');
+
+    Route::get('/books', BookIndex::class)->name('books.index');
 
     Route::redirect('settings', 'settings/profile');
     Route::get('settings/profile', Profile::class)->name('settings.profile');

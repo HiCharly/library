@@ -7,7 +7,7 @@
         <div class="flex flex-row flex-wrap items-stretch gap-4 justify-start mt-4">
             @foreach ($this->libraries as $library)
                 <div
-                    class="rounded-lg overflow-hidden relative border border-neutral-200/60 bg-white text-neutral-700 shadow-sm w-full lg:w-[380px]">
+                    class="rounded-lg overflow-hidden relative border border-neutral-200/60 bg-white text-neutral-700 shadow-sm w-full md:w-[380px]">
                     <div class="h-60 flex items-center justify-center bg-neutral-100">
                         <flux:icon.wallet class="size-25" />
                     </div>
@@ -29,7 +29,7 @@
             @endforeach
 
             @can('create', Library::class)
-                <div class="w-full lg:w-[380px]">
+                <div class="w-full md:w-[380px]">
                     <flux:modal.trigger name="create-library" class="block">
                         <flux:button class="h-full w-full flex flex-col items-center justify-center gap-2 p-4 border-dashed cursor-pointer">
                             <flux:icon.plus />
