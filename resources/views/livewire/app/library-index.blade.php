@@ -16,7 +16,9 @@
                         <flux:text>
                             This card element can be used to display a product, post, or any other type of data.
                         </flux:text>
-                        <flux:button class="w-full mt-5">{{ __('actions.view') }}</flux:button>
+                        <flux:button class="w-full mt-5" :href="route('libraries.show', $library->id)">
+                            {{ __('actions.view') }}
+                        </flux:button>
                     </div>
 
                     <flux:icon.trash
