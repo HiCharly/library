@@ -29,12 +29,14 @@
             @endforeach
 
             @can('create', Library::class)
-                <flux:modal.trigger name="create-library">
-                    <div class="w-full lg:w-[380px] flex flex-col items-center justify-center gap-2 p-4 border-dashed shadow-sm rounded-lg cursor-pointer transition hover:bg-accent-50 bg-white hover:bg-zinc-50 dark:bg-zinc-700 dark:hover:bg-zinc-600/75 text-zinc-800 dark:text-white border border-zinc-200 hover:border-zinc-200 border-b-zinc-300/80 dark:border-zinc-600 dark:hover:border-zinc-600 active:scale-95">
-                        <flux:icon.plus />
-                        <span>{{ __('app.library.create_button') }}</span>
-                    </div>
-                </flux:modal.trigger>
+                <div>
+                    <flux:modal.trigger name="create-library" class="block">
+                        <flux:button class="h-full w-full lg:w-[380px] flex flex-col items-center justify-center gap-2 p-4 border-dashed cursor-pointer">
+                            <flux:icon.plus />
+                            <span>{{ __('app.library.create_button') }}</span>
+                        </flux:button>
+                    </flux:modal.trigger>
+                </div>
                 <flux:modal name="create-library" class="md:w-96">
                     <form wire:submit="store" class="space-y-6">
                         <flux:heading size="lg">{{ __('app.library.create_title') }}</flux:heading>
