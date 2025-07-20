@@ -29,9 +29,9 @@
             @endforeach
 
             @can('create', Library::class)
-                <div>
+                <div class="w-full lg:w-[380px]">
                     <flux:modal.trigger name="create-library" class="block">
-                        <flux:button class="h-full w-full lg:w-[380px] flex flex-col items-center justify-center gap-2 p-4 border-dashed cursor-pointer">
+                        <flux:button class="h-full w-full flex flex-col items-center justify-center gap-2 p-4 border-dashed cursor-pointer">
                             <flux:icon.plus />
                             <span>{{ __('app.library.create_button') }}</span>
                         </flux:button>
