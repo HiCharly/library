@@ -56,6 +56,10 @@
     @apply  !mb-0 !leading-tight;
 }
 
+[data-flux-button] {
+    @apply active:scale-95 transition-transform;
+}   
+
 input:focus[data-flux-control],
 textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
