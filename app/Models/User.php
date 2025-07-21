@@ -66,4 +66,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Library::class);
     }
+
+    /**
+     * Get the books owned by the user
+     */
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'book_user_library')
+            ->withPivot('library_id')
+            ->withTimestamps();
+    }
 }

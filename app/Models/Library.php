@@ -16,4 +16,14 @@ class Library extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the books in the library.
+     */
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'book_user_library')
+            ->withPivot('user_id')
+            ->withTimestamps();
+    }
 }
