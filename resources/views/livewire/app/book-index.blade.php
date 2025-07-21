@@ -6,27 +6,7 @@
 
     <div class="flex flex-row flex-wrap items-stretch gap-4 justify-start mt-4">
             @foreach ($this->books as $book)
-                <div
-                    class="rounded-lg overflow-hidden relative border border-neutral-200/60 bg-white text-neutral-700 shadow-sm w-full md:w-[380px]">
-                    @if($book->thumbnail_url)
-                        <div class="h-60 w-full bg-cover object-center" style="background-image: url('{{ $book->thumbnail_url }}');"></div>
-                    @else
-                        <div class="h-60 flex items-center justify-center bg-neutral-100">
-                            <flux:icon.book-open-text class="size-25" />
-                        </div>
-                    @endif
-
-                    <div class="p-7">
-                        <flux:heading>{{ $book->title }}</flux:heading>
-                        <flux:text class="line-clamp-3" title="{{ $book->description }}">
-                            {{ $book->description }}
-                        </flux:text>
-                        <flux:spacer/>
-                        <flux:button class="w-full mt-5" :href="route('books.show', $book->id)">
-                            {{ __('actions.view') }}
-                        </flux:button>
-                    </div>
-                </div>
+                <livewire:app.book-card :book="$book" />
             @endforeach
 
             @can('create', Book::class)
