@@ -1,5 +1,5 @@
-<div>
-    <a href="{{ route('books.show', $book->id) }}" class="cursor-pointer" wire:navigate>
+<div class="grow">
+    <a href="{{ route('books.show', $book->id) }}" class="block cursor-pointer" wire:navigate>
         <div class="rounded-lg overflow-hidden relative border border-neutral-200/60 bg-white text-neutral-700 shadow-sm w-full md:w-[380px]">
             @if($book->thumbnail_url)
                 <div class="h-60 w-full bg-cover object-center" style="background-image: url('{{ $book->thumbnail_url }}');"></div>
