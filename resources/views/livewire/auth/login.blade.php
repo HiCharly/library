@@ -4,6 +4,20 @@
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
 
+    @if(!app()->isProduction())
+        <flux:dropdown >
+            <flux:button icon:trailing="chevron-down" class="w-full">Se connecter en tant que</flux:button>
+
+            <flux:menu>
+                @foreach(App\Models\User::all() as $user)
+                    <flux:menu.item wire:click="loginAs('{{ $user->id }}')" class="flex items-center gap-2">
+                        {{ $user->name }}
+                    </flux:menu.item>
+                @endforeach
+            </flux:menu>
+        </flux:dropdown>
+    @endif
+
     <form wire:submit="login" class="flex flex-col gap-6">
         <!-- Email Address -->
         <flux:input
