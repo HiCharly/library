@@ -5,6 +5,7 @@ namespace App\Livewire\App;
 use App\Livewire\Forms\BookForm;
 use App\Models\Book;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class BookIndex extends Component
@@ -17,12 +18,12 @@ class BookIndex extends Component
         return Book::all();;
     }
 
-    public function store() {
-        
-        $this->authorize('create', Book::class);
+    #[On('book-created')]
+    public function bookCreated(string $initiator, Book $book) {
+        if($initiator !== get_class($this)) {
+            return;
+        }
 
-        $this->form->store();
-
-        $this->modal('create-book')->close();
+        // TODO : book created notification
     }
 }

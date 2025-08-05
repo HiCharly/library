@@ -6,6 +6,8 @@ use App\Models\Book;
 use DateTime;
 use Google\Client;
 use Google\Service\Books;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class Google
 {
@@ -64,51 +66,69 @@ class Google
         return self::$instances[$cls];
     }
 
-    public function getBooksByIsbn(string $isbn): array
+    public function search(string $query): Collection
     {
-        $query = 'isbn:' . $isbn;
-        $results = $this->service->volumes->listVolumes($query);
-        $books = [];
+        $cacheKey = 'google_books_search_' . md5($query);
+        $ttl = 60 * 60 * 24; // Cache for 24 hours
 
-        foreach ($results->getItems() as $item) {
-            $book = new Book();
-            $book->isbn = $isbn;
+        $apiResponse = Cache::remember($cacheKey, $ttl, function () use ($query) {
+            return $this->service->volumes->listVolumes($query);
+        });
 
-            if(!empty($item['volumeInfo']['title'])) {
-                $book->title = $item['volumeInfo']['title'];
-            }
+        $books = new Collection();
 
-            if(is_array($item['volumeInfo']['authors'] ?? null)) {
-                $book->author = implode(', ', $item['volumeInfo']['authors']);
-            }
-
-            if(!empty($item['volumeInfo']['description'])) {
-                $book->description = $item['volumeInfo']['description'];
-            }
-
-            if(!empty($item['volumeInfo']['publisher'])) {
-                $book->publisher = $item['volumeInfo']['publisher'];
-            }
-
-            if(!empty($item['volumeInfo']['publishedDate'])) {
-                $book->published_at = DateTime::createFromFormat('Y-m-d', $item['volumeInfo']['publishedDate']);
-            }
-
-            if(!empty($item['volumeInfo']['imageLinks']['thumbnail'])) {
-                $book->thumbnail_url = $item['volumeInfo']['imageLinks']['thumbnail'];
-            }
-
-            if(!empty($item['volumeInfo']['pageCount'])) {
-                $book->page_count = $item['volumeInfo']['pageCount'];
-            }
-
-            if(!empty($item['accessInfo']['webReaderLink'])) {
-                $book->web_reader_url = $item['accessInfo']['webReaderLink'];
-            }
-
-            $books[] = $book;
+        foreach ($apiResponse->getItems() as $item) {
+            $books->push($this->convertItemToBook($item));
         }
 
         return $books;
+    }
+
+    private function convertItemToBook($item): Book
+    {
+        $book = new Book();
+
+        if (isset($item['volumeInfo']['industryIdentifiers'])) {
+            foreach ($item['volumeInfo']['industryIdentifiers'] as $identifier) {
+                if ($identifier['type'] === 'ISBN_13') {
+                    $book->isbn = $identifier['identifier'];
+                    break;
+                }
+            }
+        }
+
+        if(!empty($item['volumeInfo']['title'])) {
+            $book->title = $item['volumeInfo']['title'];
+        }
+
+        if(is_array($item['volumeInfo']['authors'] ?? null)) {
+            $book->author = implode(', ', $item['volumeInfo']['authors']);
+        }
+
+        if(!empty($item['volumeInfo']['description'])) {
+            $book->description = $item['volumeInfo']['description'];
+        }
+
+        if(!empty($item['volumeInfo']['publisher'])) {
+            $book->publisher = $item['volumeInfo']['publisher'];
+        }
+
+        if(!empty($item['volumeInfo']['publishedDate'])) {
+            $book->published_at = DateTime::createFromFormat('Y-m-d', $item['volumeInfo']['publishedDate']);
+        }
+
+        if(!empty($item['volumeInfo']['imageLinks']['thumbnail'])) {
+            $book->thumbnail_url = $item['volumeInfo']['imageLinks']['thumbnail'];
+        }
+
+        if(!empty($item['volumeInfo']['pageCount'])) {
+            $book->page_count = $item['volumeInfo']['pageCount'];
+        }
+
+        if(!empty($item['accessInfo']['webReaderLink'])) {
+            $book->web_reader_url = $item['accessInfo']['webReaderLink'];
+        }
+
+        return $book;
     }
 }

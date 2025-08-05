@@ -29,9 +29,15 @@ class BookForm extends Form
     #[Validate('nullable|integer|min:1')]
     public $page_count = null;
 
-    public function store() 
+    public function store()
     {
         $this->validate();
+
+        // Check if the book already exists
+        $existingBook = Book::where('isbn', $this->isbn)->first();
+        if ($existingBook) {
+            return $existingBook;
+        }
 
         $book = new Book();
         $book->title = $this->title;
@@ -42,5 +48,7 @@ class BookForm extends Form
         $book->published_at = $this->published_at;
         $book->page_count = $this->page_count;
         $book->save();
-    }  
+
+        return $book;
+    }
 }

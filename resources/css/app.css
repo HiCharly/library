@@ -23,7 +23,7 @@
     --color-zinc-900: var(--color-neutral-900);
     --color-zinc-950: var(--color-neutral-950);
 
-    
+
     --color-accent: var(--color-orange-500);
     --color-accent-content: var(--color-orange-600);
     --color-accent-foreground: var(--color-white);
@@ -57,8 +57,12 @@
 }
 
 [data-flux-button] {
-    @apply active:scale-95 transition-transform;
-}   
+    @apply active:scale-95 transition cursor-pointer;
+}
+
+[data-flux-modal], [data-flux-modal] > dialog {
+    @apply h-[100dvh] w-[100dvw] overflow-auto m-0 rounded-none max-w-[100dvw] max-h-[100dvh];
+}
 
 input:focus[data-flux-control],
 textarea:focus[data-flux-control],

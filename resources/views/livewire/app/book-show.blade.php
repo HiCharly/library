@@ -1,5 +1,5 @@
 <div>
-    <flux:heading size="lg">{{ $book->title }}</flux:heading>
+    <flux:heading size="xl">{{ $book->title }}</flux:heading>
 
     <div class="lg:flex flex-row items-start align-top gap-4 mt-4">
         @if($book->thumbnail_url)
