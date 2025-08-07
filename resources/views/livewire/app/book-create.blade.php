@@ -1,6 +1,6 @@
 @use('App\Enums\BookCreateMode')
 
-<div class="w-full md:w-[380px]">
+<div class="w-full">
     <flux:modal.trigger name="create-book" class="block">
         <flux:button class="h-full w-full flex flex-col items-center justify-center gap-2 p-4 border-dashed">
             <flux:icon.plus />
@@ -44,9 +44,9 @@
             @if($mode === BookCreateMode::SCAN)
                 <video id="video" class="border border-gray-200 w-full h-[auto] rounded-xl"></video>
             @elseif($mode === BookCreateMode::SEARCH)
-                <form class="flex flex-col items-center gap-2 mb-8" wire:submit="submitSearch">
+                <form class="flex flex-col xl:flex-row items-center gap-2 mb-8" wire:submit="submitSearch">
                     <flux:input x-ref="searchTermInput" wire:model="searchTerm" placeholder="{{ __('app.book.search_placeholder') }}" class="flex-1" />
-                    <flux:button type="submit" variant="primary" class="w-full">
+                    <flux:button type="submit" variant="primary" class="w-full xl:w-auto">
                         {{ __('actions.search') }}
                     </flux:button>
                 </form>
@@ -58,7 +58,7 @@
                             <flux:badge color="zinc">{{ $searchResults?->count() }}</flux:badge>
                         </div>
 
-                        <div class="flex flex-row flex-wrap items-stretch gap-4 justify-start">
+                        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
                             @forelse($searchResults as $i => $book)
                                 <x-books.book-card :book="$book" wire:key="search_result_{{ $i }}" wire:click="importBook({{ $i }})">
                                     <flux:button class="w-full mt-3" wire:click="importBook({{ $i }})">

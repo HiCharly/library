@@ -1,27 +1,44 @@
 @props(['book'])
 
-<div class="rounded-lg grow overflow-hidden relative border border-neutral-200/60 bg-white text-neutral-700 shadow-sm w-full md:w-[380px]">
+<div class="rounded-lg flex flex-row justify-start items-stretch w-full border border-neutral-200/60 overflow-hidden">
     @if($book->thumbnail_url)
-        <div class="h-60 w-full bg-cover object-center" style="background-image: url('{{ $book->thumbnail_url }}');"></div>
+        <div class="aspect-[2/3] w-33/100 bg-cover bg-center"
+            style="background-image: url('{{ $book->thumbnail_url }}');">
+        </div>
     @else
-        <div class="h-60 flex items-center justify-center bg-neutral-100">
-            <flux:icon.book-open-text class="size-25" />
+        <div class="aspect-[2/3] w-33/100 bg-neutral-100 flex items-center justify-center">
+            <flux:icon.book-open-text class="size-10" />
         </div>
     @endif
-
-    <div class="p-7">
+    <div class="w-full flex flex-col p-4 gap-2">
         <flux:heading>{{ $book->title }}</flux:heading>
-        <flux:text class="line-clamp-3" title="{{ $book->description }}">
+
+        <flux:text class="text-xs line-clamp-3 text-neutral-700 ">
             {{ $book->description }}
         </flux:text>
-        <div class="mt-4 flex flex-row flex-wrap gap-2 items-stretch">
-            <flux:badge variant="pill" icon="users" size="sm" :title="__('app.book.author')">
-                {{ $book->author }}
-            </flux:badge>
-            <flux:badge variant="pill" icon="building-library" size="sm" :title="__('app.book.publisher')">
-                {{ $book->publisher }}
-            </flux:badge>
+
+        <div class="flex flex-col items-start gap-1 text-sm">
+            <div class="flex flex-row items-center gap-2">
+                <flux:icon.users class="size-3" />
+                <flux:text class="line-clamp-1" class="text-xs" variant="strong">
+                    {{ $book->author }}
+                </flux:text>
+            </div>
+            <div class="flex flex-row items-center gap-2">
+                <flux:icon.building-library class="size-3" />
+                <flux:text class="line-clamp-1" class="text-xs" variant="strong">
+                    {{ $book->publisher }}
+                </flux:text>
+            </div>
+            <div class="flex flex-row items-center gap-2">
+                <flux:icon.calendar class="size-3" />
+                <flux:text class="line-clamp-1" class="text-xs" variant="strong">
+                    {{ $book->published_at?->format('d/m/Y') }}
+                </flux:text>
+            </div>
         </div>
+
+        <flux:spacer/>
 
         {{ $slot }}
     </div>

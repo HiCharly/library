@@ -18,7 +18,7 @@
         <section class="flex flex-col gap-2 w-full">
             <flux:heading>{{ trans_choice('app.book.book', 2) }}</flux:heading>
 
-            <div class="flex flex-row flex-wrap items-stretch gap-4 justify-start">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
                 @can('create', \App\Models\Book::class)
                     <livewire:app.book-create :initiator="get_class($this)" />
                 @endcan
