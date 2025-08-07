@@ -26,7 +26,8 @@ class Google
      * The Singleton's constructor should always be private to prevent direct
      * construction calls with the `new` operator.
      */
-    protected function __construct() {
+    protected function __construct()
+    {
         $this->client = new Client();
         $this->client->setApplicationName("Client_Library_Examples");
         $this->client->setDeveloperKey(config('api.google.api_key'));
@@ -37,7 +38,9 @@ class Google
     /**
      * Singletons should not be cloneable.
      */
-    protected function __clone() {}
+    protected function __clone()
+    {
+    }
 
     /**
      * Singletons should not be restorable from strings.
@@ -97,35 +100,35 @@ class Google
             }
         }
 
-        if(!empty($item['volumeInfo']['title'])) {
+        if (!empty($item['volumeInfo']['title'])) {
             $book->title = $item['volumeInfo']['title'];
         }
 
-        if(is_array($item['volumeInfo']['authors'] ?? null)) {
+        if (is_array($item['volumeInfo']['authors'] ?? null)) {
             $book->author = implode(', ', $item['volumeInfo']['authors']);
         }
 
-        if(!empty($item['volumeInfo']['description'])) {
+        if (!empty($item['volumeInfo']['description'])) {
             $book->description = $item['volumeInfo']['description'];
         }
 
-        if(!empty($item['volumeInfo']['publisher'])) {
+        if (!empty($item['volumeInfo']['publisher'])) {
             $book->publisher = $item['volumeInfo']['publisher'];
         }
 
-        if(!empty($item['volumeInfo']['publishedDate'])) {
+        if (!empty($item['volumeInfo']['publishedDate'])) {
             $book->published_at = DateTime::createFromFormat('Y-m-d', $item['volumeInfo']['publishedDate']);
         }
 
-        if(!empty($item['volumeInfo']['imageLinks']['thumbnail'])) {
+        if (!empty($item['volumeInfo']['imageLinks']['thumbnail'])) {
             $book->thumbnail_url = $item['volumeInfo']['imageLinks']['thumbnail'];
         }
 
-        if(!empty($item['volumeInfo']['pageCount'])) {
+        if (!empty($item['volumeInfo']['pageCount'])) {
             $book->page_count = $item['volumeInfo']['pageCount'];
         }
 
-        if(!empty($item['accessInfo']['webReaderLink'])) {
+        if (!empty($item['accessInfo']['webReaderLink'])) {
             $book->web_reader_url = $item['accessInfo']['webReaderLink'];
         }
 

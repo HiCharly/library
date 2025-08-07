@@ -17,7 +17,7 @@ class LibraryIndex extends Component
     {
         return Auth::user()->libraries;
     }
-    
+
     public function store()
     {
         $this->authorize('create', Library::class);

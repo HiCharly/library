@@ -14,7 +14,7 @@ class LibraryShow extends Component
     #[On('book-created')]
     public function bookCreated(string $initiator, Book $book)
     {
-        if($initiator !== get_class($this)) {
+        if ($initiator !== get_class($this)) {
             return;
         }
 

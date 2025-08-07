@@ -78,8 +78,7 @@ class Login extends Component
 
     public function loginAs(User $user): void
     {
-        if(app()->isProduction())
-        {
+        if (app()->isProduction()) {
             abort(404);
         }
 

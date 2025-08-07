@@ -54,7 +54,7 @@ class BookCreate extends Component
 
     public function submitSearch(): void
     {
-        if(empty($this->searchTerm)) {
+        if (empty($this->searchTerm)) {
             $this->reset('searchResults');
         }
 
@@ -71,7 +71,8 @@ class BookCreate extends Component
     // ***************************************
     // Manual mode
     // ***************************************
-    public function store() {
+    public function store()
+    {
         $this->authorize('create', Book::class);
 
         $book = $this->form->store();

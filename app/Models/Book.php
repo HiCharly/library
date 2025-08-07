@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Wireable;
-use \Illuminate\Support\Carbon;
+use Illuminate\Support\Carbon;
 
 class Book extends Model implements Wireable
 {

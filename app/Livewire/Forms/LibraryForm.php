@@ -11,7 +11,7 @@ class LibraryForm extends Form
     #[Validate('required|min:3|max:255|string')]
     public $name = '';
 
-    public function store() 
+    public function store()
     {
         $this->validate();
 

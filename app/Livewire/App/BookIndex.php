@@ -15,12 +15,14 @@ class BookIndex extends Component
     #[Computed]
     public function books()
     {
-        return Book::all();;
+        return Book::all();
+        ;
     }
 
     #[On('book-created')]
-    public function bookCreated(string $initiator, Book $book) {
-        if($initiator !== get_class($this)) {
+    public function bookCreated(string $initiator, Book $book)
+    {
+        if ($initiator !== get_class($this)) {
             return;
         }
 
