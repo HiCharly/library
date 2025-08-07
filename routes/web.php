@@ -1,6 +1,5 @@
 <?php
 
-use App\Livewire\App\BookIndex;
 use App\Livewire\App\BookShow;
 use App\Livewire\App\LibraryIndex;
 use App\Livewire\App\LibraryShow;
