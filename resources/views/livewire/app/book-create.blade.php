@@ -44,8 +44,14 @@
             @if($mode === BookCreateMode::SCAN)
                 <video id="video" class="border border-gray-200 w-full h-[auto] rounded-xl"></video>
             @elseif($mode === BookCreateMode::SEARCH)
-                <form class="flex flex-col xl:flex-row items-center gap-2 mb-8" wire:submit="submitSearch">
-                    <flux:input x-ref="searchTermInput" wire:model="searchTerm" placeholder="{{ __('app.book.search_placeholder') }}" class="flex-1" />
+                <form class="flex flex-col xl:flex-row items-center gap-2 mb-8" wire:submit="submitSearch" x-data="{
+                    init() {
+                        if($wire.searchTerm === '') {
+                            this.$refs.searchTermInput.focus();
+                        }
+                    }
+                }" x-init="$refs.searchTermInput.focus()">
+                    <flux:input x-ref="searchTermInput" wire:model="searchTerm" placeholder="{{ __('app.book.search_placeholder') }}" />
                     <flux:button type="submit" variant="primary" class="w-full xl:w-auto">
                         {{ __('actions.search') }}
                     </flux:button>
