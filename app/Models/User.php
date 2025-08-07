@@ -72,7 +72,7 @@ class User extends Authenticatable
      */
     public function books()
     {
-        return $this->belongsToMany(Book::class, 'book_user_library')
+        return $this->belongsToMany(Book::class, 'book_library')
             ->withPivot('library_id')
             ->withTimestamps();
     }

@@ -22,7 +22,7 @@ class Library extends Model
      */
     public function books()
     {
-        return $this->belongsToMany(Book::class, 'book_user_library')
+        return $this->belongsToMany(Book::class, 'book_library')
             ->withTimestamps();
     }
 }
