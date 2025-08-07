@@ -21,7 +21,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/libraries', LibraryIndex::class)->name('libraries.index');
     Route::get('/libraries/{library}', LibraryShow::class)->name('libraries.show');
 
-    Route::get('/books', BookIndex::class)->name('books.index');
     Route::get('/books/{book}', BookShow::class)->name('books.show');
 
     Route::redirect('settings', 'settings/profile');

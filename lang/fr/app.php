@@ -24,7 +24,6 @@ return [
         'book' => 'Livre|Livres',
 
         // Actions
-        'index_description' => 'Bienvenue dans votre espace de gestion des livres. Vous pouvez ajouter ou corriger les informations de vos livres ici.',
         'create_button' => 'Ajouter un livre',
         'create_title' => 'Nouveau livre',
         'import_book' => 'Importer le livre',
