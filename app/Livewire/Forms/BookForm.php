@@ -3,31 +3,32 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Book;
+use Carbon\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class BookForm extends Form
 {
     #[Validate('required|max:255|string')]
-    public $title = '';
+    public string $title = '';
 
     #[Validate('nullable|max:255|string')]
-    public $author = '';
+    public ?string $author = null;
 
     #[Validate('nullable|string')]
-    public $isbn = '';
+    public ?string $isbn = null;
 
     #[Validate('nullable|string')]
-    public $description = '';
+    public ?string $description = null;
 
     #[Validate('nullable|max:255|string')]
-    public $publisher = '';
+    public ?string $publisher = null;
 
     #[Validate('nullable|date')]
-    public $published_at = null;
+    public ?string $published_at = null;
 
     #[Validate('nullable|integer|min:1')]
-    public $page_count = null;
+    public ?int $page_count = null;
 
     public function store()
     {

@@ -3,7 +3,7 @@
 namespace App\Services\BooksApi;
 
 use App\Models\Book;
-use DateTime;
+use Carbon\Carbon;
 use Google\Client;
 use Google\Service\Books;
 use Illuminate\Support\Collection;
@@ -117,7 +117,7 @@ class Google
         }
 
         if (!empty($item['volumeInfo']['publishedDate'])) {
-            $book->published_at = DateTime::createFromFormat('Y-m-d', $item['volumeInfo']['publishedDate']);
+            $book->published_at = Carbon::parse($item['volumeInfo']['publishedDate']);
         }
 
         if (!empty($item['volumeInfo']['imageLinks']['thumbnail'])) {

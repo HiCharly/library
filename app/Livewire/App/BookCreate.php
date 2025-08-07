@@ -6,6 +6,7 @@ use App\Enums\BookCreateMode;
 use App\Livewire\Forms\BookForm;
 use App\Models\Book;
 use App\Services\BooksApi\Google;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
@@ -64,7 +65,13 @@ class BookCreate extends Component
     public function importBook(int $searchResultOffset): void
     {
         $book = $this->searchResults->offsetGet($searchResultOffset);
-        $this->form->fill($book);
+
+        // Prepare data for the form
+        $formData = $book->toArray();
+        $formData = Arr::except($formData, ['published_at']);
+        $formData['published_at'] = $book->published_at?->format('Y-m-d');
+
+        $this->form->fill($formData);
         $this->mode = BookCreateMode::MANUAL;
     }
 
