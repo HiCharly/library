@@ -8,4 +8,6 @@ return [
     'save' => 'Enregistrer',
     'search' => 'Rechercher',
     'back' => 'Retour',
+    'cancel' => 'Annuler',
+    'quit' => 'Quitter',
 ];

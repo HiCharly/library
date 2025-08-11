@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use Notifiable;
+    use HasRelationships;
 
     /**
      * The attributes that are mass assignable.
@@ -68,13 +70,24 @@ class User extends Authenticatable
         return $this->hasMany(Library::class);
     }
 
-    /**
-     * Get the books owned by the user
-     */
     public function books()
     {
-        return $this->belongsToMany(Book::class, 'book_library')
-            ->withPivot('library_id')
-            ->withTimestamps();
+        return $this->hasManyDeep(
+            Book::class, // Final related model we want to reach
+            [
+                Library::class, // First intermediate model: User -> Library
+                'book_library'  // Second intermediate: pivot table Library -> Book
+            ],
+            [
+                'user_id',     // Foreign key on libraries table pointing to users.id
+                'library_id',  // Foreign key on book_library pointing to libraries.id
+                'id'           // Local key on books table
+            ],
+            [
+                'id',          // Local key on users table
+                'id',          // Local key on libraries table
+                'book_id'      // Foreign key on book_library pointing to books.id
+            ]
+        );
     }
 }

@@ -12,11 +12,19 @@ window.bookScan = async function() {
     ) || videoInputDevices[0];
     const selectedDeviceId = backCamera.deviceId;
 
-    return await codeReader.decodeFromVideoDevice(selectedDeviceId, previewElem, (result, error, controls) => {
-        if (result) {
-            const event = new CustomEvent('book-scanned', { detail: { barcode: result.getText() } });
-            window.dispatchEvent(event);
-            controls.stop();
+    // Start decoding
+    const controls = await codeReader.decodeFromVideoDevice(
+        selectedDeviceId,
+        previewElem,
+        (result, error, ctrl) => {
+            if (result) {
+                window.dispatchEvent(new CustomEvent('book-scanned', {
+                    detail: { barcode: result.getText() }
+                }));
+                ctrl.stop(); // Stop camera after success
+            }
         }
-    });
+    );
+
+    return controls; // Allow Alpine to call .stop() manually on modal close
 }

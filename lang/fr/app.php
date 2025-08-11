@@ -42,4 +42,14 @@ return [
         'page_count' => 'Nombre de pages',
         'published_at' => 'Date de publication',
     ],
+
+    'book_finder' => [
+        'title' => 'J\'ai déjà ?',
+        'description' => 'Scannez un livre pour savoir s\'il est déjà dans une de vos bibliothèques.',
+        'check_book' => 'Vérifier un livre',
+        'no_results' => 'Le livre n\'a pas été trouvé dans vos bibliothèques.',
+        'found' => 'J\'ai déjà !',
+        'found_books' => 'Oui ! Nous avons trouvés les résulats suivants :',
+        'scan_again' => 'Scanner à nouveau',
+    ],
 ];
