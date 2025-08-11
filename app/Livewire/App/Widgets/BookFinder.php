@@ -2,7 +2,6 @@
 
 namespace App\Livewire\App\Widgets;
 
-use App\Models\Book;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
