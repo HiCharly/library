@@ -26,8 +26,14 @@ class BookForm extends Form
     #[Validate('nullable|date')]
     public ?string $published_at = null;
 
+    #[Validate('nullable|string')]
+    public ?string $thumbnail_url = null;
+
     #[Validate('nullable|integer|min:1')]
     public ?int $page_count = null;
+
+    #[Validate('nullable|string')]
+    public ?string $web_reader_url = null;
 
     public function store()
     {
@@ -46,7 +52,10 @@ class BookForm extends Form
         $book->description = $this->description;
         $book->publisher = $this->publisher;
         $book->published_at = $this->published_at;
+        $book->thumbnail_url = $this->thumbnail_url;
         $book->page_count = $this->page_count;
+        $book->web_reader_url = $this->web_reader_url;
+
         $book->save();
 
         return $book;
