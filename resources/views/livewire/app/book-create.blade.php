@@ -1,11 +1,10 @@
 @use('App\Enums\BookCreateMode')
 
-<div class="w-full">
-    <flux:modal.trigger name="create-book" class="block">
-        <flux:button class="h-full w-full flex flex-col items-center justify-center gap-2 p-4 border-dashed">
-            <flux:icon.plus />
-            <span>{{ __('app.book.create_button') }}</span>
-        </flux:button>
+<div>
+    <flux:modal.trigger name="create-book">
+        <flux:tooltip content="{{ __('app.book.create_button') }}" position="left">
+            <flux:icon.plus-circle class="cursor-pointer text-gray-500 hover:text-gray-600 duration-300"/>
+        </flux:tooltip>
     </flux:modal.trigger>
 
     <flux:modal name="create-book" class="w-full h-full m-0" x-on:close="selectMode(null)" x-data="{

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Wireable;
@@ -50,5 +51,18 @@ class Book extends Model implements Wireable
         $book->created_at = isset($data['created_at']) ? Carbon::parse($data['created_at']) : null;
         $book->updated_at = isset($data['updated_at']) ? Carbon::parse($data['updated_at']) : null;
         return $book;
+    }
+
+    public function scopeSearch(Builder $query, string $search): Builder
+    {
+        if(empty($search)) {
+            return $query;
+        }
+
+        return $query->where(function (Builder $query) use ($search) {
+            $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('author', 'like', '%' . $search . '%')
+                ->orWhere('isbn', 'like', '%' . $search . '%');
+        });
     }
 }

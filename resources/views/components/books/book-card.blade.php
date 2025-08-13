@@ -7,7 +7,7 @@
         </div>
     @else
         <div class="aspect-[2/3] w-33/100 bg-neutral-100 flex items-center justify-center">
-            <flux:icon.book-open-text class="size-10" />
+            <flux:icon.book-open-text class="size-10 text-neutral-600" />
         </div>
     @endif
     <div class="w-full flex flex-col p-4 gap-2">
