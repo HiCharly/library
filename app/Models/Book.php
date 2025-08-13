@@ -55,7 +55,7 @@ class Book extends Model implements Wireable
 
     public function scopeSearch(Builder $query, string $search): Builder
     {
-        if(empty($search)) {
+        if (empty($search)) {
             return $query;
         }
 
