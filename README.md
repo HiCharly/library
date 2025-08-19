@@ -32,6 +32,6 @@ cp .env.example .env
 sail up -d
 sail artisan key:generate
 sail artisan migrate --seed
-sail npm install
-sail npm run dev
+sail bun install
+sail bun run dev
 ````
