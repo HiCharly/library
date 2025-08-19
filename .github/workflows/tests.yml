@@ -30,10 +30,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'bun'
+          cache: 'npm'
 
       - name: Install Node Dependencies
-        run: bun i
+        run: npm i
 
       - name: Add Flux Credentials Loaded From ENV
         run: composer config http-basic.composer.fluxui.dev "${{ secrets.FLUX_USERNAME }}" "${{ secrets.FLUX_LICENSE_KEY }}"
@@ -48,7 +48,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Build Assets
-        run: bun run build
+        run: npm run build
 
       - name: Create SQLite Database
         run: touch database/testing.sqlite
