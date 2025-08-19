@@ -10,4 +10,5 @@ return [
     'back' => 'Retour',
     'cancel' => 'Annuler',
     'quit' => 'Quitter',
+    'clear_search' => 'Réinitialiser la recherche',
 ];
