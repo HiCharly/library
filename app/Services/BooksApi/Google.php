@@ -69,23 +69,34 @@ class Google
         return self::$instances[$cls];
     }
 
-    public function search(string $query): Collection
+    public function search(string $query, int $maxResults = 10, int $startIndex = 0): BookSearchResults
     {
-        $cacheKey = 'google_books_search_' . md5($query);
+        $cacheKey = 'google_books_search_' . md5($query) . '_' . $maxResults . '_' . $startIndex;
         $ttl = 60 * 60 * 24; // Cache for 24 hours
 
-        $apiResponse = Cache::remember($cacheKey, $ttl, function () use ($query) {
-            return $this->service->volumes->listVolumes($query);
+        $apiResponse = Cache::remember($cacheKey, $ttl, function () use ($startIndex, $maxResults, $query) {
+            return $this->service->volumes->listVolumes($query, [
+                'maxResults' => $maxResults,
+                'startIndex' => $startIndex,
+            ]);
         });
 
         $books = new Collection();
 
-        foreach ($apiResponse->getItems() as $item) {
-            $books->push($this->convertItemToBook($item));
+        if ($apiResponse->getItems()) {
+            foreach ($apiResponse->getItems() as $item) {
+                $books->push($this->convertItemToBook($item));
+            }
         }
 
-        return $books;
+        return new BookSearchResults(
+            $books,
+            $apiResponse->getTotalItems() ?? 0,
+            $maxResults,
+            $startIndex
+        );
     }
+
 
     private function convertItemToBook($item): Book
     {

@@ -60,11 +60,11 @@
                     <div class="flex flex-col gap-4">
                         <div class="flex flex-row gap-2">
                             <flux:heading size="lg">{{ __('app.book.results') }}</flux:heading>
-                            <flux:badge color="zinc">{{ $searchResults?->count() }}</flux:badge>
+                            <flux:badge color="zinc">{{ $searchResults->items->count() }}</flux:badge>
                         </div>
 
                         <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                            @forelse($searchResults as $i => $book)
+                            @forelse($searchResults->items as $i => $book)
                                 <x-books.book-card :book="$book" wire:key="search_result_{{ $i }}" wire:click="importBook({{ $i }})">
                                     <flux:button class="w-full mt-3" wire:click="importBook({{ $i }})">
                                         {{ __('app.book.import_book') }}

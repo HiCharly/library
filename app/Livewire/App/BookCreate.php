@@ -5,6 +5,7 @@ namespace App\Livewire\App;
 use App\Enums\BookCreateMode;
 use App\Livewire\Forms\BookForm;
 use App\Models\Book;
+use App\Services\BooksApi\BookSearchResults;
 use App\Services\BooksApi\Google;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -25,7 +26,6 @@ class BookCreate extends Component
     public function mount()
     {
         $this->searchTerm = '';
-        $this->searchResults = new Collection();
     }
 
     public function selectMode(?BookCreateMode $mode = null): void
@@ -51,7 +51,7 @@ class BookCreate extends Component
     // ***************************************
     public string $searchTerm;
 
-    public Collection $searchResults;
+    public BookSearchResults $searchResults;
 
     public function submitSearch(): void
     {
@@ -64,7 +64,7 @@ class BookCreate extends Component
 
     public function importBook(int $searchResultOffset): void
     {
-        $book = $this->searchResults->offsetGet($searchResultOffset);
+        $book = $this->searchResults->items->offsetGet($searchResultOffset);
 
         // Prepare data for the form
         $formData = $book->toArray();
