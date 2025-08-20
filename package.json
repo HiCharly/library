@@ -6,10 +6,12 @@
         "dev": "vite"
     },
     "dependencies": {
+        "@alpinejs/intersect": "^3.14.9",
         "@tailwindcss/line-clamp": "^0.4.4",
         "@tailwindcss/vite": "^4.0.7",
         "@zxing/browser": "^0.1.5",
         "@zxing/library": "^0.21.3",
+        "alpinejs": "^3.14.9",
         "autoprefixer": "^10.4.20",
         "axios": "^1.8.2",
         "concurrently": "^9.0.1",

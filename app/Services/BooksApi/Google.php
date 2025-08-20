@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services\BooksApi;
 
 use App\Models\Book;
@@ -69,15 +68,15 @@ class Google
         return self::$instances[$cls];
     }
 
-    public function search(string $query, int $maxResults = 10, int $startIndex = 0): BookSearchResults
+    public function search(string $query, int $perPage = 10, int $offset = 0): BookSearchResults
     {
-        $cacheKey = 'google_books_search_' . md5($query) . '_' . $maxResults . '_' . $startIndex;
+        $cacheKey = 'google_books_search_' . md5($query) . '_' . $perPage . '_' . $offset;
         $ttl = 60 * 60 * 24; // Cache for 24 hours
 
-        $apiResponse = Cache::remember($cacheKey, $ttl, function () use ($startIndex, $maxResults, $query) {
+        $apiResponse = Cache::remember($cacheKey, $ttl, function () use ($offset, $perPage, $query) {
             return $this->service->volumes->listVolumes($query, [
-                'maxResults' => $maxResults,
-                'startIndex' => $startIndex,
+                'maxResults' => $perPage,
+                'startIndex' => $offset,
             ]);
         });
 
@@ -92,11 +91,23 @@ class Google
         return new BookSearchResults(
             $books,
             $apiResponse->getTotalItems() ?? 0,
-            $maxResults,
-            $startIndex
+            $perPage,
+            $offset
         );
     }
 
+    public function loadMoreResults(BookSearchResults $currentResults, string $query): BookSearchResults
+    {
+        $nextoffset = $currentResults->offset + $currentResults->perPage;
+        $nextResults = $this->search($query, $currentResults->perPage, $nextoffset);
+        $mergedItems = $currentResults->items->concat($nextResults->items);
+        return new BookSearchResults(
+            $mergedItems,
+            $nextResults->total,
+            $nextResults->perPage,
+            $nextResults->offset
+        );
+    }
 
     private function convertItemToBook($item): Book
     {

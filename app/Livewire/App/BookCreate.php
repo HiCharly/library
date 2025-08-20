@@ -62,6 +62,11 @@ class BookCreate extends Component
         $this->searchResults = Google::getInstance()->search($this->searchTerm);
     }
 
+    public function loadMoreResults(): void
+    {
+        $this->searchResults = Google::getInstance()->loadMoreResults($this->searchResults, $this->searchTerm);
+    }
+
     public function importBook(int $searchResultOffset): void
     {
         $book = $this->searchResults->items->offsetGet($searchResultOffset);
