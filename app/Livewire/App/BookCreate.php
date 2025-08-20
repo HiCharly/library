@@ -8,7 +8,6 @@ use App\Models\Book;
 use App\Services\BooksApi\BookSearchResults;
 use App\Services\BooksApi\Google;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;

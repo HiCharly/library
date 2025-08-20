@@ -26,7 +26,7 @@ class BookSearchResults implements Wireable
     public function toLivewire(): array
     {
         return [
-            'items' => $this->items->map(fn($item) => $item->toLivewire())->all(),
+            'items' => $this->items->map(fn ($item) => $item->toLivewire())->all(),
             'total' => $this->total,
             'perPage' => $this->perPage,
             'offset' => $this->offset,
@@ -37,7 +37,7 @@ class BookSearchResults implements Wireable
     public static function fromLivewire($data)
     {
         return new self(
-            collect($data['items'])->map(fn($item) => Book::fromLivewire($item)),
+            collect($data['items'])->map(fn ($item) => Book::fromLivewire($item)),
             $data['total'],
             $data['perPage'],
             $data['offset'],
