@@ -69,22 +69,45 @@ class Google
         return self::$instances[$cls];
     }
 
-    public function search(string $query): Collection
+    public function search(string $query, int $perPage = 10, int $offset = 0): BookSearchResults
     {
-        $cacheKey = 'google_books_search_' . md5($query);
+        $cacheKey = 'google_books_search_' . md5($query) . '_' . $perPage . '_' . $offset;
         $ttl = 60 * 60 * 24; // Cache for 24 hours
 
-        $apiResponse = Cache::remember($cacheKey, $ttl, function () use ($query) {
-            return $this->service->volumes->listVolumes($query);
+        $apiResponse = Cache::remember($cacheKey, $ttl, function () use ($offset, $perPage, $query) {
+            return $this->service->volumes->listVolumes($query, [
+                'maxResults' => $perPage,
+                'startIndex' => $offset,
+            ]);
         });
 
         $books = new Collection();
 
-        foreach ($apiResponse->getItems() as $item) {
-            $books->push($this->convertItemToBook($item));
+        if ($apiResponse->getItems()) {
+            foreach ($apiResponse->getItems() as $item) {
+                $books->push($this->convertItemToBook($item));
+            }
         }
 
-        return $books;
+        return new BookSearchResults(
+            $books,
+            $apiResponse->getTotalItems() ?? 0,
+            $perPage,
+            $offset
+        );
+    }
+
+    public function loadMoreResults(BookSearchResults $currentResults, string $query): BookSearchResults
+    {
+        $nextoffset = $currentResults->offset + $currentResults->perPage;
+        $nextResults = $this->search($query, $currentResults->perPage, $nextoffset);
+        $mergedItems = $currentResults->items->concat($nextResults->items);
+        return new BookSearchResults(
+            $mergedItems,
+            $nextResults->total,
+            $nextResults->perPage,
+            $nextResults->offset
+        );
     }
 
     private function convertItemToBook($item): Book

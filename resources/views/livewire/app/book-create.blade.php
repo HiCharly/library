@@ -60,11 +60,11 @@
                     <div class="flex flex-col gap-4">
                         <div class="flex flex-row gap-2">
                             <flux:heading size="lg">{{ __('app.book.results') }}</flux:heading>
-                            <flux:badge color="zinc">{{ $searchResults?->count() }}</flux:badge>
+                            <flux:badge color="zinc">{{ $searchResults->total > 100 ? '100+' : $searchResults->total }}</flux:badge>
                         </div>
 
                         <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                            @forelse($searchResults as $i => $book)
+                            @forelse($searchResults->items as $i => $book)
                                 <x-books.book-card :book="$book" wire:key="search_result_{{ $i }}" wire:click="importBook({{ $i }})">
                                     <flux:button class="w-full mt-3" wire:click="importBook({{ $i }})">
                                         {{ __('app.book.import_book') }}
@@ -74,6 +74,14 @@
                                 <flux:text class="text-gray-500">{{ __('app.book.no_results') }}</flux:text>
                             @endforelse
                         </div>
+
+                        @if($searchResults->hasMore)
+                            <div class="flex justify-center mt-4" x-intersect:enter="$wire.loadMoreResults()">
+                                <flux:button wire:click="loadMoreResults" class="w-full xl:w-auto">
+                                    {{ __('actions.show_more') }}
+                                </flux:button>
+                            </div>
+                        @endif
                     </div>
                 @endif
             @elseif($mode === BookCreateMode::MANUAL)
