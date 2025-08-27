@@ -1,7 +1,17 @@
 <?php
 
 return [
-    'dashboard' => 'Tableau de bord',
+    'ui' => [
+        'dashboard' => 'Tableau de bord',
+        'platform' => 'Plateforme',
+    ],
+
+    'user' => [
+        'name' => 'Nom',
+        'full_name' => 'Nom complet',
+        'email' => 'Adresse e-mail',
+        'password' => 'Mot de passe',
+    ],
 
     'library' => [
         'library' => 'Bibliothèque|Bibliothèques',
