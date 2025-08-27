@@ -38,6 +38,13 @@ return [
             'report' => false,
         ],
 
+        'backup' => [
+            'driver' => 'ftp',
+            'host' => env('BACKUP_FTP_HOST'),
+            'username' => env('BACKUP_FTP_USERNAME'),
+            'password' => env('BACKUP_FTP_PASSWORD'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
