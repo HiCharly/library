@@ -1,8 +1,9 @@
 # Library
 
 ![Laravel](https://img.shields.io/badge/Laravel-12.x-red?logo=laravel)
-![PHP](https://img.shields.io/badge/PHP-8.2-blue?logo=php)
+![PHP](https://img.shields.io/badge/PHP-8.4-blue?logo=php)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/hicharly/library/tests.yml?branch=main&logo=github)
+[![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2Fdc4168d8-0af4-4cc4-aa6d-da154978f379%3Fdate%3D1&style=plastic)](https://forge.laravel.com/servers/954062/sites/2831007)
 
 ---
 
