@@ -12,4 +12,5 @@ return [
     'quit' => 'Quitter',
     'clear_search' => 'Réinitialiser la recherche',
     'show_more' => 'Afficher plus',
+    'show_less' => 'Afficher moins',
 ];

@@ -11,9 +11,12 @@ use Illuminate\Support\Arr;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class BookCreate extends Component
 {
+    use WithFileUploads;
+
     #[Locked]
     public string $initiator;
 
@@ -87,6 +90,8 @@ class BookCreate extends Component
         $this->authorize('create', Book::class);
 
         $book = $this->form->store();
+
+        $this->form->reset();
 
         $this->modal('create-book')->close();
 

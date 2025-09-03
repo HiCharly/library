@@ -51,6 +51,7 @@ return [
         'publisher' => 'Éditeur',
         'page_count' => 'Nombre de pages',
         'published_at' => 'Date de publication',
+        'thumbnail' => 'Couverture',
     ],
 
     'book_finder' => [

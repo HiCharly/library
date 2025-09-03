@@ -1,31 +1,51 @@
+@php use Carbon\Carbon; @endphp
 <div>
-    <flux:heading size="xl">{{ $book->title }}</flux:heading>
+    <div class="flex flex-col gap-8">
+        <flux:heading size="xl">{{ $book->title }}</flux:heading>
 
-    <div class="lg:flex flex-row items-start align-top gap-4 mt-4">
-        @if($book->thumbnail_url)
-            <img src="{{ $book->thumbnail_url }}" class="w-full md:w-1/3 mb-4    h-auto object-contain">
-        @endif
+        <div class="flex flex-row gap-4">
+            <div class="h-[300px] w-[200px] rounded-lg overflow-hidden">
+                @if($coverUrl = $book->getCoverUrl())
+                    <img src="{{ $coverUrl }}" class="size-full object-cover" />
+                @else
+                    <x-books.book-cover-placeholder />
+                @endif
+            </div>
+            <div class="flex flex-col gap-2">
+                <div class="flex flex-col">
+                    <flux:text size="sm">{{ __('app.book.author') }}</flux:text>
+                    <flux:text>{{ $book->author ?? 'N/A' }}</flux:text>
+                </div>
 
-        <div class="space-y-2">
-            <flux:text>
-                <u>{{ __('app.book.author') }}:</u> {{ $book->author }}
-            </flux:text>
-            <flux:text>
-                <u>{{ __('app.book.publisher') }}:</u> {{ $book->publisher }}
-            </flux:text>
-            <flux:text>
-                <u>{{ __('app.book.published_at') }}:</u> {{ $book->published_at?->format('d/m/Y') }}
-            </flux:text>
-            <flux:text>
-                <u>{{ __('app.book.page_count') }}:</u> {{ $book->page_count }}
-            </flux:text>
-            <flux:text>
-                <u>{{ __('app.book.isbn') }}:</u> {{ $book->isbn }}
-            </flux:text>
+                <div class="flex flex-col">
+                    <flux:text size="sm">{{ __('app.book.publisher') }}</flux:text>
+                    <flux:text>{{ $book->publisher ?? 'N/A' }}</flux:text>
+                </div>
 
-            <flux:text>
-                <u>{{ __('app.book.description') }}:</u> {{ $book->description }}
-            </flux:text>
+                <div class="flex flex-col">
+                    <flux:text size="sm">{{ __('app.book.published_at') }}</flux:text>
+                    <flux:text>{{ $book->published_at ? Carbon::parse($book->published_at)->format('d/m/Y') : '-' }}</flux:text>
+                </div>
+
+                <div class="flex flex-col">
+                    <flux:text size="sm">{{ __('app.book.isbn') }}</flux:text>
+                    <flux:text>{{ $book->isbn ?? 'N/A' }}</flux:text>
+                </div>
+
+                <div class="flex flex-col">
+                    <flux:text size="sm">{{ __('app.book.page_count') }}</flux:text>
+                    <flux:text>{{ $book->page_count ?? 'N/A' }}</flux:text>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <flux:heading>{{ __('app.book.description') }}</flux:heading>
+            <x-books.book-description :$book :lines="5"/>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <flux:button :href="route('books.edit', $book)">{{ __('actions.edit') }}</flux:button>
         </div>
     </div>
 </div>
