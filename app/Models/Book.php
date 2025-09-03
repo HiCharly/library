@@ -70,10 +70,9 @@ class Book extends Model implements Wireable, HasMedia
     public function getCoverUrl(): ?string
     {
         $media = $this->getMedia('cover');
-        if($media->isNotEmpty()) {
+        if ($media->isNotEmpty()) {
             return $media->first()->getUrl();
-        }
-        else {
+        } else {
             return $this->thumbnail_url;
         }
     }

@@ -61,7 +61,7 @@ class BookForm extends Form
         $book->page_count = $this->page_count;
         $book->web_reader_url = $this->web_reader_url;
 
-        if($this->cover) {
+        if ($this->cover) {
             $book->addMedia($this->cover)->toMediaCollection('cover');
         }
 
@@ -85,7 +85,7 @@ class BookForm extends Form
         $book->web_reader_url = $this->web_reader_url;
         $book->save();
 
-        if($this->cover) {
+        if ($this->cover) {
             $book->addMedia($this->cover)->toMediaCollection('cover');
         }
 
