@@ -62,12 +62,32 @@ class BookForm extends Form
         $book->web_reader_url = $this->web_reader_url;
 
         if($this->cover) {
-            $book->addMedia($this->cover->getRealPath())->toMediaCollection('cover');
+            $book->addMedia($this->cover)->toMediaCollection('cover');
         }
 
         $book->save();
 
-        $this->reset();
+        return $book;
+    }
+
+    public function update(Book $book)
+    {
+        $this->validate();
+
+        $book->title = $this->title;
+        $book->author = $this->author;
+        $book->isbn = $this->isbn;
+        $book->description = $this->description;
+        $book->publisher = $this->publisher;
+        $book->published_at = $this->published_at;
+        $book->thumbnail_url = $this->thumbnail_url;
+        $book->page_count = $this->page_count;
+        $book->web_reader_url = $this->web_reader_url;
+        $book->save();
+
+        if($this->cover) {
+            $book->addMedia($this->cover)->toMediaCollection('cover');
+        }
 
         return $book;
     }

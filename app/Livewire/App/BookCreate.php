@@ -91,6 +91,8 @@ class BookCreate extends Component
 
         $book = $this->form->store();
 
+        $this->form->reset();
+
         $this->modal('create-book')->close();
 
         $this->dispatch('book-created', initiator: $this->initiator, book: $book->id);

@@ -26,17 +26,8 @@ class BookEdit extends Component
     {
         $this->authorize('update', $this->book);
 
-        $this->form->validate();
-
-        $this->book->fill($this->form->except(['cover']));
-
-        if ($this->form->cover) {
-            $this->book
-                ->addMedia($this->form->cover->getRealPath())
-                ->toMediaCollection('cover');
-        }
-
-        $this->book->save();
+        $this->form->update($this->book);
+        $this->form->reset('cover');
 
         $this->dispatch('book-updated', book: $this->book->id);
     }
