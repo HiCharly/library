@@ -86,15 +86,8 @@
                 @endif
             @elseif($mode === BookCreateMode::MANUAL)
                 <form wire:submit="store" class="space-y-6">
-                    <flux:input :label="__('app.book.title')" :placeholder="__('app.book.title')" wire:model="form.title" required />
-                    <flux:textarea :label="__('app.book.description')" :placeholder="__('app.book.description')" wire:model="form.description" />
-                    <flux:input :label="__('app.book.isbn')" :placeholder="__('app.book.isbn')" wire:model="form.isbn" />
-                    <flux:input :label="__('app.book.author')" :placeholder="__('app.book.author')" wire:model="form.author" />
-                    <flux:input :label="__('app.book.publisher')" :placeholder="__('app.book.publisher')" wire:model="form.publisher" />
-                    <flux:input :label="__('app.book.published_at')" type="date" wire:model="form.published_at" />
-                    <flux:input type="hidden" wire:model="form.thumbnail_url"/>
-                    <flux:input :label="__('app.book.page_count')" type="number" wire:model="form.page_count" min="0"/>
-                    <flux:input type="hidden" wire:model="form.web_reader_url"/>
+                    <x-books.book-form-fields :$form />
+
                     <div class="flex">
                         <flux:spacer />
                         <flux:button type="submit" variant="primary">{{ __('actions.create') }}</flux:button>

@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Wireable;
 use Illuminate\Support\Carbon;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Book extends Model implements Wireable
+class Book extends Model implements Wireable, HasMedia
 {
     /** @use HasFactory<\Database\Factories\BookFactory> */
     use HasFactory;
+    use InteractsWithMedia;
 
     protected $casts = [
         'published_at' => 'datetime',
@@ -64,5 +67,23 @@ class Book extends Model implements Wireable
                 ->orWhere('author', 'like', '%' . $search . '%')
                 ->orWhere('isbn', 'like', '%' . $search . '%');
         });
+    }
+
+    public function getCoverUrl(): ?string
+    {
+        $media = $this->getMedia('cover');
+        if($media->isNotEmpty()) {
+            return $media->first()->getUrl();
+        }
+        else {
+            return $this->thumbnail_url;
+        }
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('cover')
+            ->singleFile();
     }
 }

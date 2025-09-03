@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\App\BookEdit;
 use App\Livewire\App\BookShow;
 use App\Livewire\App\LibraryIndex;
 use App\Livewire\App\LibraryShow;
@@ -21,6 +22,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/libraries/{library}', LibraryShow::class)->name('libraries.show');
 
     Route::get('/books/{book}', BookShow::class)->name('books.show');
+    Route::get('/books/{book}/edit', BookEdit::class)->name('books.edit');
 
     Route::redirect('settings', 'settings/profile');
     Route::get('settings/profile', Profile::class)->name('settings.profile');
