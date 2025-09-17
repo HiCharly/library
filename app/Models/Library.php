@@ -31,7 +31,7 @@ class Library extends Model
     {
         return $this->shares()
             ->where('user_id', $user->id)
-            ->where('role', LibraryShareRole::Owner)
+            ->where('role', LibraryShareRole::OWNER)
             ->exists();
     }
 
@@ -71,7 +71,7 @@ class Library extends Model
         return $query->whereHas(
             'shares',
             fn ($q) => $q->where('user_id', $user->id)
-            ->whereIn('role', [LibraryShareRole::Owner, LibraryShareRole::Editor])
+            ->whereIn('role', [LibraryShareRole::OWNER, LibraryShareRole::EDITOR])
         );
     }
 }

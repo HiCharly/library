@@ -47,7 +47,7 @@ class LibraryPolicy
         // Only owner can delete
         return $library->shares()
             ->where('user_id', $user->id)
-            ->where('role', LibraryShareRole::Owner)
+            ->where('role', LibraryShareRole::OWNER)
             ->exists();
     }
 }

@@ -23,7 +23,7 @@ class LibraryForm extends Form
         // Set creator as owner in shares
         $library->shares()->create([
             'user_id' => Auth::id(),
-            'role' => LibraryShareRole::Owner,
+            'role' => LibraryShareRole::OWNER,
         ]);
     }
 }

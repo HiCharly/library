@@ -4,7 +4,12 @@ namespace App\Enums;
 
 enum LibraryShareRole: string
 {
-    case Owner = 'owner';
-    case Editor = 'editor';
-    case Viewer = 'viewer';
+    case VIEWER = 'viewer';
+    case EDITOR = 'editor';
+    case OWNER = 'owner';
+
+    public function label(): string
+    {
+        return __('enums/library_share_role.' . $this->name);
+    }
 }

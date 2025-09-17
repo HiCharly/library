@@ -13,12 +13,12 @@ it('allows viewer to view but not edit', function () {
     $library = Library::factory()->create();
     $library->shares()->create([
         'user_id' => $owner->id,
-        'role' => LibraryShareRole::Owner,
+        'role' => LibraryShareRole::OWNER,
     ]);
 
     $library->shares()->create([
         'user_id' => $viewer->id,
-        'role' => LibraryShareRole::Viewer,
+        'role' => LibraryShareRole::VIEWER,
     ]);
 
     $policy = app(\App\Policies\LibraryPolicy::class);
@@ -32,12 +32,12 @@ it('allows editor to view and edit', function () {
     $library = Library::factory()->create();
     $library->shares()->create([
         'user_id' => $owner->id,
-        'role' => LibraryShareRole::Owner,
+        'role' => LibraryShareRole::OWNER,
     ]);
 
     $library->shares()->create([
         'user_id' => $editor->id,
-        'role' => LibraryShareRole::Editor,
+        'role' => LibraryShareRole::EDITOR,
     ]);
 
     $policy = app(\App\Policies\LibraryPolicy::class);
@@ -50,7 +50,7 @@ it('owner can view and edit and delete', function () {
     $library = Library::factory()->create();
     $library->shares()->create([
         'user_id' => $owner->id,
-        'role' => LibraryShareRole::Owner,
+        'role' => LibraryShareRole::OWNER,
     ]);
 
     $policy = app(\App\Policies\LibraryPolicy::class);
@@ -65,12 +65,12 @@ it('policy denies update to viewer', function () {
     $library = Library::factory()->create();
     $library->shares()->create([
         'user_id' => $owner->id,
-        'role' => LibraryShareRole::Owner,
+        'role' => LibraryShareRole::OWNER,
     ]);
 
     $library->shares()->create([
         'user_id' => $viewer->id,
-        'role' => LibraryShareRole::Viewer,
+        'role' => LibraryShareRole::VIEWER,
     ]);
 
     $policy = app(\App\Policies\LibraryPolicy::class);

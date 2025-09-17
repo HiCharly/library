@@ -29,7 +29,7 @@ class LibraryFactory extends Factory
             $user = User::factory()->create();
             $library->shares()->create([
                 'user_id' => $user->id,
-                'role' => LibraryShareRole::Owner,
+                'role' => LibraryShareRole::OWNER,
             ]);
         });
     }
