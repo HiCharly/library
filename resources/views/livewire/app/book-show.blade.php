@@ -44,8 +44,17 @@
             <x-books.book-description :$book :lines="5"/>
         </div>
 
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-row gap-2">
             <flux:button :href="route('books.edit', $book)">{{ __('actions.edit') }}</flux:button>
+
+            @if($book->web_reader_url)
+                <flux:button :href="$book->web_reader_url" target="_blank" rel="noopener" variant="primary">
+                    <span class="inline-flex items-center gap-2">
+                        {{ __('actions.preview') }}
+                        <flux:icon.arrow-top-right-on-square class="size-4" />
+                    </span>
+                </flux:button>
+            @endif
         </div>
     </div>
 </div>
