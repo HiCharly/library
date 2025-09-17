@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Enums\LibraryShareRole;
 
 class User extends Authenticatable
 {
@@ -62,14 +65,6 @@ class User extends Authenticatable
             ->implode('');
     }
 
-    /**
-     * Get the libraries associated with the user.
-     */
-    public function libraries()
-    {
-        return $this->hasMany(Library::class);
-    }
-
     public function books()
     {
         return $this->hasManyDeep(
@@ -89,5 +84,23 @@ class User extends Authenticatable
                 'book_id'      // Foreign key on book_library pointing to books.id
             ]
         );
+    }
+
+    /**
+     * Libraries shared with this user (any role).
+     */
+    public function sharedLibraries(): BelongsToMany
+    {
+        return $this->belongsToMany(Library::class, 'library_shares')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    /**
+     * Shares records for this user.
+     */
+    public function libraryShares(): HasMany
+    {
+        return $this->hasMany(LibraryShare::class);
     }
 }
