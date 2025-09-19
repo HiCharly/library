@@ -7,6 +7,8 @@ return [
     ],
 
     'user' => [
+        'user' => 'Utilisateur|Utilisateurs',
+
         'name' => 'Nom',
         'full_name' => 'Nom complet',
         'email' => 'Adresse e-mail',
@@ -31,6 +33,8 @@ return [
         'manage_shares' => 'Gérer',
         'add_share' => 'Invitez un utilisateur',
         'edit_share' => 'Modifier le partage',
+        'revoke_share' => 'Révoquer l\'accès',
+        'revoke_share_confirmation' => 'Êtes-vous sûr de vouloir révoquer l\'accès de :name à cette bibliothèque ?',
         'share' => 'Inviter',
         'role' => 'Rôle',
         'select_role' => 'Sélectionner un rôle',

@@ -17,7 +17,7 @@
 
         <div class="mt-6">
             <div class="mb-4">
-                <flux:heading size="sm" class="mb-2">{{ __('app.user.name') }}</flux:heading>
+                <flux:heading size="sm" class="mb-2">{{ trans_choice('app.user.user', 1) }}</flux:heading>
                 <div class="flex items-center gap-3">
                     <flux:avatar :name="$user->name" size="sm" />
                     <div>
@@ -40,15 +40,19 @@
                     <flux:error name="form.role" />
                 </flux:field>
 
-                <div class="flex justify-end gap-3">
+                <div class="flex gap-3">
                     <flux:modal.close>
-                        <flux:button variant="outline">
+                        <flux:button class="w-full">
                             {{ __('actions.cancel') }}
                         </flux:button>
                     </flux:modal.close>
-                    <flux:button type="submit" variant="primary">
+                    <flux:button type="submit" variant="primary" class="w-full">
                         {{ __('actions.edit') }}
                     </flux:button>
+                </div>
+
+                <div class="mt-8">
+                    <livewire:app.library-revoke-share :library="$library" :user="$user" />
                 </div>
             </form>
         </div>
