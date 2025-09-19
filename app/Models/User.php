@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Enums\LibraryShareRole;
 
 class User extends Authenticatable
 {
