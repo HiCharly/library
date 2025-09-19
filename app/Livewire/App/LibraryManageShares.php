@@ -24,7 +24,7 @@ class LibraryManageShares extends Component
 
         $this->form->store();
 
-        $this->form->reset();
+        $this->form->reset('email', 'role');
 
         $this->library->load('sharedUsers');
     }
