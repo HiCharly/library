@@ -30,6 +30,7 @@ return [
         'shares' => 'Partages',
         'manage_shares' => 'Gérer',
         'add_share' => 'Invitez un utilisateur',
+        'edit_share' => 'Modifier le partage',
         'share' => 'Inviter',
         'role' => 'Rôle',
         'select_role' => 'Sélectionner un rôle',
@@ -74,5 +75,8 @@ return [
 
     'actions' => [
         'close' => 'Fermer',
+        'edit' => 'Modifier',
+        'cancel' => 'Annuler',
+        'update' => 'Mettre à jour',
     ],
 ];

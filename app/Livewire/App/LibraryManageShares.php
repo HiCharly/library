@@ -5,6 +5,7 @@ namespace App\Livewire\App;
 use App\Models\Library;
 use App\Livewire\Forms\LibraryAddShare;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class LibraryManageShares extends Component
 {
@@ -25,6 +26,12 @@ class LibraryManageShares extends Component
 
         $this->form->reset();
 
+        $this->library->load('sharedUsers');
+    }
+
+    #[On('share-updated')]
+    public function shareUpdated(): void
+    {
         $this->library->load('sharedUsers');
     }
 }

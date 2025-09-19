@@ -19,27 +19,32 @@
             <div>
                 <flux:heading class="mb-4">{{ __('app.library.shares') }}</flux:heading>
                 
-                <div class="space-y-2">
-                    @foreach($library->sharedUsers as $user)
-                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                            <div class="flex items-center gap-3">
-                                <flux:avatar :name="$user->name" size="sm" />
-                                <div>
-                                    <div class="font-medium">{{ $user->name }}</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">
-                                        {{ $user->email }}
-                                    </div>
-                                </div>
-                            </div>
-                            <flux:badge 
-                                :icon="$user->pivot->role->icon()"
-                                size="sm"
-                            >
-                                {{ $user->pivot->role->label() }}
-                            </flux:badge>
-                        </div>
-                    @endforeach
-                </div>
+                 <div class="space-y-2">
+                     @foreach($library->sharedUsers as $user)
+                         <div class="flex flex-col sm:flex-row sm:items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                             <div class="flex items-center gap-3 flex-1 min-w-0">
+                                 <flux:avatar :name="$user->name" size="sm" />
+                                 <div class="min-w-0 flex-1">
+                                     <div class="font-medium truncate">{{ $user->name }}</div>
+                                     <div class="text-sm text-gray-500 dark:text-gray-400 truncate">
+                                         {{ $user->email }}
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="flex items-start gap-2">
+                                 @if($user->id !== auth()->id())
+                                     <livewire:app.library-update-share :library="$library" :user="$user" :key="'update-share-'.$user->id" />
+                                 @endif
+                                 <flux:badge 
+                                     :icon="$user->pivot->role->icon()"
+                                     size="sm"
+                                 >
+                                     {{ $user->pivot->role->label() }}
+                                 </flux:badge>
+                             </div>
+                         </div>
+                     @endforeach
+                 </div>
             </div>
 
             {{-- Add share form --}}
