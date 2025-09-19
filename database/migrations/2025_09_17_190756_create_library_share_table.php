@@ -31,7 +31,7 @@ return new class () extends Migration {
             DB::table('library_share')->insert([
                 'library_id' => $library->id,
                 'user_id' => $library->user_id,
-                'role' => LibraryShareRole::Owner->value,
+                'role' => LibraryShareRole::OWNER->value,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -56,7 +56,7 @@ return new class () extends Migration {
         // Backfill user_id from owner shares
         $owners = DB::table('library_share')
             ->select('library_id', 'user_id')
-            ->where('role', LibraryShareRole::Owner->value)
+            ->where('role', LibraryShareRole::OWNER->value)
             ->get();
 
         foreach ($owners as $owner) {
