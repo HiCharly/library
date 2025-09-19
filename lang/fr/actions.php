@@ -10,6 +10,7 @@ return [
     'back' => 'Retour',
     'cancel' => 'Annuler',
     'quit' => 'Quitter',
+    'close' => 'Fermer',
     'preview' => 'Prévisualiser',
     'clear_search' => 'Réinitialiser la recherche',
     'show_more' => 'Afficher plus',

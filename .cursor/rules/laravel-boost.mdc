@@ -38,7 +38,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - Do not change the application's dependencies without approval.
 
 ## Frontend Bundling
-- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `npm run build`, `npm run dev`, or `composer run dev`. Ask them.
+- If the user doesn't see a frontend change reflected in the UI, it could mean they need to run `sail bun run build`, `sail bun run dev`, or `composer run dev`.
 
 ## Replies
 - Be concise in your explanations - focus on what's important rather than explaining obvious details.
@@ -57,6 +57,15 @@ This application is a Laravel application and its main Laravel ecosystems packag
 
 ## URLs
 - Whenever you share a project URL with the user you should use the `get-absolute-url` tool to ensure you're using the correct scheme, domain / IP, and port.
+
+## Sail-First CLI (Important)
+- Always run CLI commands through Sail instead of the host tools. Prefer these mappings:
+  - `php` → `sail php`
+  - `composer` → `sail composer`
+  - `php artisan ...` → `sail artisan ...` (always pass `--no-interaction` when appropriate)
+  - `bun ...` → `sail bun ...`
+  - Pint → `sail vendor/bin/pint ...`
+- If a guideline references a bare command (e.g. `php artisan test`), execute the Sail equivalent (e.g. `sail artisan test`).
 
 ## Tinker / Debugging
 - You should use the `tinker` tool when you need to execute PHP to debug code or query Eloquent models directly.
@@ -156,10 +165,10 @@ protected function isAccessible(User $user, ?string $path = null): bool
 ### Testing
 - When creating models for tests, use the factories for the models. Check if the factory has custom states that can be used before manually setting up the model.
 - Faker: Use methods such as `$this->faker->word()` or `fake()->randomDigit()`. Follow existing conventions whether to use `$this->faker` or `fake()`.
-- When creating tests, make use of `php artisan make:test [options] <name>` to create a feature test, and pass `--unit` to create a unit test. Most tests should be feature tests.
+- When creating tests, make use of `sail artisan make:test [options] <name>` to create a feature test, and pass `--unit` to create a unit test. Most tests should be feature tests.
 
 ### Vite Error
-- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
+- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `sail bun run build` or ask the user to run `sail bun run dev` or `composer run dev`.
 
 
 === laravel/v12 rules ===
@@ -405,8 +414,8 @@ $delete = fn(Product $product) => $product->delete();
 
 ## Laravel Pint Code Formatter
 
-- You must run `vendor/bin/pint --dirty` before finalizing changes to ensure your code matches the project's expected style.
-- Do not run `vendor/bin/pint --test`, simply run `vendor/bin/pint` to fix any formatting issues.
+- You must run Pint via Sail before finalizing changes to ensure your code matches the project's expected style: `sail vendor/bin/pint --dirty`.
+- Do not run `sail vendor/bin/pint --test`, simply run Pint to fix any formatting issues: `sail vendor/bin/pint`.
 
 
 === pest/core rules ===
@@ -430,9 +439,9 @@ it('is true', function () {
 
 ### Running Tests
 - Run the minimal number of tests using an appropriate filter before finalizing code edits.
-- To run all tests: `php artisan test`.
-- To run all tests in a file: `php artisan test tests/Feature/ExampleTest.php`.
-- To filter on a particular test name: `php artisan test --filter=testName` (recommended after making a change to a related file).
+- To run all tests: `sail artisan test`.
+- To run all tests in a file: `sail artisan test tests/Feature/ExampleTest.php`.
+- To filter on a particular test name: `sail artisan test --filter=testName` (recommended after making a change to a related file).
 - When the tests relating to your changes are passing, ask the user if they would like to run the entire test suite to ensure everything is still passing.
 
 ### Pest Assertions

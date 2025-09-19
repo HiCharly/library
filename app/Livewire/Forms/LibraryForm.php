@@ -5,6 +5,7 @@ namespace App\Livewire\Forms;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use App\Enums\LibraryShareRole;
 
 class LibraryForm extends Form
 {
@@ -16,8 +17,13 @@ class LibraryForm extends Form
         $this->validate();
 
         $library = new \App\Models\Library();
-        $library->user_id = Auth::id();
         $library->name = $this->name;
         $library->save();
+
+        // Set creator as owner in shares
+        $library->shares()->create([
+            'user_id' => Auth::id(),
+            'role' => LibraryShareRole::OWNER,
+        ]);
     }
 }

@@ -15,7 +15,9 @@ class LibraryIndex extends Component
     #[Computed]
     public function libraries()
     {
-        return Auth::user()->libraries;
+        return Library::query()
+            ->viewableBy(Auth::user())
+            ->get();
     }
 
     public function store()

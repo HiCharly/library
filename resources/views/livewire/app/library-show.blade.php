@@ -5,10 +5,28 @@
         <section class="flex flex-col gap-2 w-full">
             <flux:heading>{{ __('app.library.stats') }}</flux:heading>
 
-            <div class="flex flex-row flex-wrap space-x-4 space-y-2 text-sm">
+            <div class="flex flex-row flex-wrap gap-2">
                 <flux:badge variant="pill" icon="book-open-text" size="sm">
                     {{ $library->books()->count() }} {{ strtolower(trans_choice('app.book.book', $library->books()->count())) }}
                 </flux:badge>
+            </div>
+        </section>
+
+        <section class="flex flex-col gap-2 w-full">
+            <div class="flex flex-row items-center justify-between">
+                <flux:heading>{{ __('app.library.shares') }}</flux:heading>
+                
+                @can('manageShares', $library)
+                    <livewire:app.library-manage-shares :library="$library" />
+                @endcan
+            </div>
+
+            <div class="flex flex-row flex-wrap gap-2">
+                @foreach($library->sharedUsers as $user)
+                    <flux:badge variant="pill" :icon="$user->pivot->role->icon()" size="sm">
+                        {{ $user->name }}
+                    </flux:badge>
+                @endforeach
             </div>
         </section>
 
@@ -16,8 +34,8 @@
             <div class="flex flex-row items-center justify-between">
                 <flux:heading>{{ trans_choice('app.book.book', 2) }}</flux:heading>
 
-                @can('create', \App\Models\Book::class)
-                    <livewire:app.book-create :initiator="get_class($this)" />
+                @can('addBookToLibrary', $library)
+                    <livewire:app.book-create :initiator="get_class($this)" :library="$library" />
                 @endcan
             </div>
 

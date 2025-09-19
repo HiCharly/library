@@ -7,6 +7,8 @@ return [
     ],
 
     'user' => [
+        'user' => 'Utilisateur|Utilisateurs',
+
         'name' => 'Nom',
         'full_name' => 'Nom complet',
         'email' => 'Adresse e-mail',
@@ -23,8 +25,19 @@ return [
         'create_title' => 'Nouvelle bibliothèque',
         'delete_confirmation' => 'Êtes-vous sûr de vouloir supprimer cette bibliothèque ? Cette action est irréversible et supprimera toutes les données associées.',
 
-        // Misc
+        // Statistics
         'stats' => 'Statistiques',
+
+        // Shares
+        'shares' => 'Partages',
+        'manage_shares' => 'Gérer',
+        'add_share' => 'Invitez un utilisateur',
+        'edit_share' => 'Modifier le partage',
+        'revoke_share' => 'Révoquer l\'accès',
+        'revoke_share_confirmation' => 'Êtes-vous sûr de vouloir révoquer l\'accès de :name à cette bibliothèque ?',
+        'share' => 'Inviter',
+        'role' => 'Rôle',
+        'select_role' => 'Sélectionner un rôle',
 
         // Attributes
         'name' => 'Nom',
@@ -62,5 +75,12 @@ return [
         'found' => 'J\'ai déjà !',
         'found_books' => 'Oui ! Nous avons trouvés les résulats suivants :',
         'scan_again' => 'Scanner à nouveau',
+    ],
+
+    'actions' => [
+        'close' => 'Fermer',
+        'edit' => 'Modifier',
+        'cancel' => 'Annuler',
+        'update' => 'Mettre à jour',
     ],
 ];

@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Library;
 use App\Models\User;
+use App\Enums\LibraryShareRole;
 
 class LibraryPolicy
 {
@@ -12,8 +13,10 @@ class LibraryPolicy
      */
     public function view(User $user, Library $library): bool
     {
-        // Allow users to view their own libraries
-        return $library->user_id === $user->id;
+        return Library::query()
+            ->viewableBy($user)
+            ->whereKey($library->getKey())
+            ->exists();
     }
 
     /**
@@ -30,8 +33,10 @@ class LibraryPolicy
      */
     public function update(User $user, Library $library): bool
     {
-        // Allow users to update their own libraries
-        return $library->user_id === $user->id;
+        return Library::query()
+            ->editableBy($user)
+            ->whereKey($library->getKey())
+            ->exists();
     }
 
     /**
@@ -39,7 +44,34 @@ class LibraryPolicy
      */
     public function delete(User $user, Library $library): bool
     {
-        // Allow users to delete their own libraries
-        return $library->user_id === $user->id;
+        // Only owner can delete
+        return $library->shares()
+            ->where('user_id', $user->id)
+            ->where('role', LibraryShareRole::OWNER)
+            ->exists();
+    }
+
+    /**
+     * Determine whether the user can manage shares of the library.
+     */
+    public function manageShares(User $user, Library $library): bool
+    {
+        // Only owner can manage shares
+        return $library->shares()
+            ->where('user_id', $user->id)
+            ->where('role', LibraryShareRole::OWNER)
+            ->exists();
+    }
+
+    /**
+     * Determine whether the user can add books to the library.
+     */
+    public function addBookToLibrary(User $user, Library $library): bool
+    {
+        // Owner and editors can add books
+        return $library->shares()
+            ->where('user_id', $user->id)
+            ->whereIn('role', [LibraryShareRole::OWNER, LibraryShareRole::EDITOR])
+            ->exists();
     }
 }
