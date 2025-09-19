@@ -11,7 +11,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('library_shares', function (Blueprint $table) {
+        Schema::create('library_share', function (Blueprint $table) {
             $table->id();
             $table->foreignId('library_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
@@ -22,13 +22,13 @@ return new class () extends Migration {
             $table->index(['user_id', 'role']);
         });
 
-        
-        // Backfill existing owners into library_shares
+
+        // Backfill existing owners into library_share
         $libraries = DB::table('libraries')->select('id', 'user_id')->whereNotNull('user_id')->get();
 
         foreach ($libraries as $library) {
             // Insert owner share if not already present
-            DB::table('library_shares')->insert([
+            DB::table('library_share')->insert([
                 'library_id' => $library->id,
                 'user_id' => $library->user_id,
                 'role' => LibraryShareRole::Owner->value,
@@ -54,7 +54,7 @@ return new class () extends Migration {
         });
 
         // Backfill user_id from owner shares
-        $owners = DB::table('library_shares')
+        $owners = DB::table('library_share')
             ->select('library_id', 'user_id')
             ->where('role', LibraryShareRole::Owner->value)
             ->get();
@@ -63,6 +63,6 @@ return new class () extends Migration {
             DB::table('libraries')->where('id', $owner->library_id)->update(['user_id' => $owner->user_id]);
         }
 
-        Schema::dropIfExists('library_shares');
+        Schema::dropIfExists('library_share');
     }
 };

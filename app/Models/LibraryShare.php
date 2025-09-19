@@ -8,7 +8,7 @@ use App\Enums\LibraryShareRole;
 
 class LibraryShare extends Pivot
 {
-    protected $table = 'library_shares';
+    protected $table = 'library_share';
 
     protected $fillable = [
         'library_id',

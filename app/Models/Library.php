@@ -47,7 +47,7 @@ class Library extends Model
      */
     public function sharedUsers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'library_shares')
+        return $this->belongsToMany(User::class, 'library_share')
             ->withPivot('role')
             ->withTimestamps()
             ->using(LibraryShare::class);
