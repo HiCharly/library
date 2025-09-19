@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Enums\LibraryShareRole;
 
-class LibraryShare extends Model
+class LibraryShare extends Pivot
 {
+    protected $table = 'library_shares';
+
     protected $fillable = [
         'library_id',
         'user_id',

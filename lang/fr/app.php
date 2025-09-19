@@ -25,6 +25,7 @@ return [
 
         // Misc
         'stats' => 'Statistiques',
+        'shares' => 'Partages',
 
         // Attributes
         'name' => 'Nom',
