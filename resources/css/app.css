@@ -61,7 +61,7 @@
 }
 
 [data-flux-modal], [data-flux-modal] > dialog {
-    @apply h-[100dvh] w-[100dvw] overflow-auto m-0 rounded-none max-w-[100dvw] max-h-[100dvh];
+    @apply h-[95dvh] w-[100dvw] overflow-auto m-0 mt-[5dvh] rounded-none max-w-[100dvw] max-h-[95dvh] rounded-t-3xl;
 }
 
 input:focus[data-flux-control],
