@@ -62,4 +62,16 @@ class LibraryPolicy
             ->where('role', LibraryShareRole::OWNER)
             ->exists();
     }
+
+    /**
+     * Determine whether the user can add books to the library.
+     */
+    public function addBookToLibrary(User $user, Library $library): bool
+    {
+        // Owner and editors can add books
+        return $library->shares()
+            ->where('user_id', $user->id)
+            ->whereIn('role', [LibraryShareRole::OWNER, LibraryShareRole::EDITOR])
+            ->exists();
+    }
 }

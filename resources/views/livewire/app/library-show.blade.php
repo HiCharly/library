@@ -34,8 +34,8 @@
             <div class="flex flex-row items-center justify-between">
                 <flux:heading>{{ trans_choice('app.book.book', 2) }}</flux:heading>
 
-                @can('create', \App\Models\Book::class)
-                    <livewire:app.book-create :initiator="get_class($this)" />
+                @can('addBookToLibrary', $library)
+                    <livewire:app.book-create :initiator="get_class($this)" :library="$library" />
                 @endcan
             </div>
 

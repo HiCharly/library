@@ -4,7 +4,7 @@ namespace App\Livewire\App;
 
 use App\Enums\BookCreateMode;
 use App\Livewire\Forms\BookForm;
-use App\Models\Book;
+use App\Models\Library;
 use App\Services\BooksApi\BookSearchResults;
 use App\Services\BooksApi\Google;
 use Illuminate\Support\Arr;
@@ -19,6 +19,9 @@ class BookCreate extends Component
 
     #[Locked]
     public string $initiator;
+
+    #[Locked]
+    public Library $library;
 
     public BookForm $form;
 
@@ -87,7 +90,7 @@ class BookCreate extends Component
     // ***************************************
     public function store()
     {
-        $this->authorize('create', Book::class);
+        $this->authorize('addBookToLibrary', $this->library);
 
         $book = $this->form->store();
 
