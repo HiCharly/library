@@ -26,6 +26,7 @@ return [
         // Misc
         'stats' => 'Statistiques',
         'shares' => 'Partages',
+        'manage_shares' => 'Gérer',
 
         // Attributes
         'name' => 'Nom',

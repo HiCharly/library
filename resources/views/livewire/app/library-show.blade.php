@@ -13,7 +13,13 @@
         </section>
 
         <section class="flex flex-col gap-2 w-full">
-            <flux:heading>{{ __('app.library.shares') }}</flux:heading>
+            <div class="flex flex-row items-center justify-between">
+                <flux:heading>{{ __('app.library.shares') }}</flux:heading>
+                
+                @can('manageShares', $library)
+                    <livewire:app.library-manage-shares :library="$library" />
+                @endcan
+            </div>
 
             <div class="flex flex-row flex-wrap gap-2">
                 @foreach($library->sharedUsers as $user)

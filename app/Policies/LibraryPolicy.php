@@ -50,4 +50,16 @@ class LibraryPolicy
             ->where('role', LibraryShareRole::OWNER)
             ->exists();
     }
+
+    /**
+     * Determine whether the user can manage shares of the library.
+     */
+    public function manageShares(User $user, Library $library): bool
+    {
+        // Only owner can manage shares
+        return $library->shares()
+            ->where('user_id', $user->id)
+            ->where('role', LibraryShareRole::OWNER)
+            ->exists();
+    }
 }
