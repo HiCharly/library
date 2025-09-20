@@ -24,6 +24,9 @@ It allows teachers to take inventory of the various libraries and books availabl
 - **Widgets**  
   Quickly check if a book is already in your collection with an easy-to-use search and scan widget.
 
+- **Library Sharing**  
+  Share your libraries with other users and collaborate on book collections. Set different permission levels (viewer, editor) to control access to your libraries.
+
 ## ⚙️ Installation
 See [Configuring a shell alias](https://laravel.com/docs/12.x/sail#configuring-a-shell-alias) to setup the `sail` command.
 
