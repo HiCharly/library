@@ -8,7 +8,7 @@
         "@tailwindcss/vite": "^4.1.16",
         "@zxing/browser": "^0.1.5",
         "@zxing/library": "^0.21.3",
-        "alpinejs": "^3.15.0",
+        "alpinejs": "^3.15.1",
         "autoprefixer": "^10.4.21",
         "axios": "^1.13.2",
         "concurrently": "^9.2.1",
@@ -170,7 +170,7 @@
 
     "@zxing/text-encoding": ["@zxing/text-encoding@0.9.0", "", {}, "sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA=="],
 
-    "alpinejs": ["alpinejs@3.15.0", "", { "dependencies": { "@vue/reactivity": "~3.1.1" } }, "sha512-lpokA5okCF1BKh10LG8YjqhfpxyHBk4gE7boIgVHltJzYoM7O9nK3M7VlntLEJGsVmu7U/RzUWajmHREGT38Eg=="],
+    "alpinejs": ["alpinejs@3.15.1", "", { "dependencies": { "@vue/reactivity": "~3.1.1" } }, "sha512-HLO1TtiE92VajFHtLLPK8BWaK1YepV/uj31UrfoGnQ00lyFOJZ+oVY3F0DghPAwvg8sLU79pmjGQSytERa2gEg=="],
 
     "ansi-regex": ["ansi-regex@5.0.1", "", {}, "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ=="],
 
