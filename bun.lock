@@ -4,7 +4,7 @@
   "workspaces": {
     "": {
       "dependencies": {
-        "@alpinejs/intersect": "^3.15.5",
+        "@alpinejs/intersect": "^3.15.8",
         "@tailwindcss/line-clamp": "^0.4.4",
         "@tailwindcss/vite": "^4.2.1",
         "@zxing/browser": "^0.1.5",
@@ -25,7 +25,7 @@
     },
   },
   "packages": {
-    "@alpinejs/intersect": ["@alpinejs/intersect@3.15.5", "", {}, "sha512-O4Xq4RZE5JFQ1zLxfKkQsgmkMKs2YZ5FDW62bjVtK8t06F3/gq6VTT7RQiCIF+HN3Tv6paCyAvxo2K7CjqYgQw=="],
+    "@alpinejs/intersect": ["@alpinejs/intersect@3.15.8", "", {}, "sha512-iDrv7rFLp48lXcQkpsojLXrDDWhYKF3NAaem0piiwRs7xBOix5UAOCd/Uj8+PLhV/fuv+itqU1qKxKal9Z0Jaw=="],
 
     "@esbuild/aix-ppc64": ["@esbuild/aix-ppc64@0.27.2", "", { "os": "aix", "cpu": "ppc64" }, "sha512-GZMB+a0mOMZs4MpDbj8RJp4cw+w1WV5NYD6xzgvzUJ5Ek2jerwfO2eADyI6ExDSUED+1X8aMbegahsJi+8mgpw=="],
 
